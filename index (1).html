@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Every Lamborghini</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;700;800&family=Barlow:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--gold:#f2c200;--bg:#141317;--panel:#1d1c22;--ink:#f4f1ea;--mute:#9f9cae;--display:"Barlow Condensed","Arial Narrow",sans-serif;--body:"Barlow",system-ui,sans-serif}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);line-height:1.5}
+:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+header{padding:80px 5vw 30px;max-width:1400px;margin:auto}
+h1{font-family:var(--display);font-weight:800;text-transform:uppercase;font-size:clamp(56px,11vw,150px);line-height:.9;animation:in .9s cubic-bezier(.2,.8,.2,1) both}
+@keyframes in{from{opacity:0;transform:translateY(40px)}}
+header p{color:var(--mute);margin-top:16px;font-size:18px;max-width:48ch}
+.bar{position:sticky;top:0;z-index:5;background:rgba(20,19,23,.92);backdrop-filter:blur(8px);padding:14px 5vw;border-bottom:1px solid #2a2932}
+.filters{max-width:1400px;margin:auto;display:flex;gap:10px;flex-wrap:wrap}
+.pill{border:1px solid #3a3944;background:none;color:var(--ink);font-family:var(--display);font-size:19px;font-weight:500;padding:6px 20px;cursor:pointer;transition:background .25s,color .25s,transform .15s}
+.pill:hover{border-color:var(--gold)}
+.pill:active{transform:scale(.95)}
+.pill[aria-pressed=true]{background:var(--gold);color:#111;border-color:var(--gold)}
+.pill.fun{margin-left:auto;border-color:var(--gold);color:var(--gold)}
+main{max-width:1400px;margin:auto;padding:32px 5vw 80px;display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:22px}
+.card{background:var(--panel);cursor:pointer;animation:pop .45s ease both;transition:transform .25s}
+.card:hover{transform:translateY(-4px)}
+@keyframes pop{from{opacity:0;transform:scale(.96)}}
+.ph{position:relative;aspect-ratio:16/10;overflow:hidden;background:#1a191f;display:grid;place-items:center;align-content:center;gap:10px;font-family:var(--display);font-size:22px;color:#6c6a7a;text-align:center;padding:10px}
+.ph.load{background:linear-gradient(100deg,#1a191f 30%,#2a2931 50%,#1a191f 70%) 0 0/200% 100%;animation:shim 1.3s linear infinite}
+@keyframes shim{to{background-position:-200% 0}}
+.ph.load::before{content:"";width:22px;height:22px;border:3px solid #3a3944;border-top-color:var(--gold);border-radius:50%;animation:spin .8s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .6s,opacity .5s;opacity:0}
+.ph img.ok{opacity:1}
+.card:hover .ph img{transform:scale(1.06)}
+.retry{background:var(--gold);color:#111;border:0;font-family:var(--display);font-size:18px;font-weight:700;padding:6px 18px;cursor:pointer}
+.info{padding:16px 18px 18px;border-top:3px solid var(--gold)}
+.info h2{font-family:var(--display);font-size:30px;line-height:1;text-transform:uppercase}
+.info .yr{color:var(--mute);font-size:15px;margin-top:2px}
+.row{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-top:14px}
+.row b{font-family:var(--display);font-size:34px;font-weight:700;line-height:1;white-space:nowrap}
+.row b small{font-size:17px;color:var(--mute);font-weight:500;margin-left:3px}
+.row span{color:var(--mute);font-size:14px;text-align:right}
+dialog{border:0;background:var(--panel);color:var(--ink);width:min(960px,94vw);max-height:94vh;overflow:auto;padding:0;margin:auto}
+dialog[open]{animation:pop .35s ease}
+dialog::backdrop{background:rgba(0,0,0,.8)}
+dialog .ph{aspect-ratio:16/9}
+.dbody{padding:22px 26px 8px;display:grid;grid-template-columns:1fr auto;gap:8px 30px;align-items:end}
+.dbody h3{font-family:var(--display);font-size:clamp(36px,6vw,64px);line-height:1;text-transform:uppercase}
+.facts{display:flex;gap:34px;flex-wrap:wrap}
+.facts div b{display:block;font-family:var(--display);font-size:30px;line-height:1.1}
+.facts div span{color:var(--mute);font-size:14px}
+.fact{margin:14px 26px 28px;padding:16px 20px;border-left:4px solid var(--gold);background:#26252d;font-size:18px;max-width:70ch}
+.fact b{font-family:var(--display);font-size:20px;color:var(--gold);display:block;margin-bottom:2px}
+.x{position:absolute;top:12px;right:14px;z-index:2;background:rgba(0,0,0,.6);color:#fff;border:0;width:40px;height:40px;font-size:22px;cursor:pointer}
+footer{padding:40px 5vw;color:var(--mute);font-size:14px;border-top:1px solid #2a2932;max-width:1400px;margin:auto}
+@media(max-width:640px){.dbody{grid-template-columns:1fr}.pill.fun{margin-left:0}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+.pill.scan{background:var(--gold);color:#111;border-color:var(--gold)}
+#scan{width:min(720px,94vw)}
+.view{position:relative;aspect-ratio:4/3;background:#0c0c0f;display:grid;place-items:center;overflow:hidden;font-family:var(--display);font-size:22px;color:#6c6a7a}
+.view video,.view img{width:100%;height:100%;object-fit:cover}
+.sbody{padding:22px 26px 28px}
+.sbody h3{font-family:var(--display);font-size:38px;line-height:1;text-transform:uppercase}
+.sbtns{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}
+.sbtns .pill{display:inline-block;line-height:1.5}
+#sstat{margin-top:14px;color:var(--mute)}
+.guess{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:10px;background:#26252d;padding:12px 16px;border:0;border-left:4px solid var(--gold);color:inherit;width:100%;font:inherit;cursor:pointer;text-align:left}
+.guess b{font-family:var(--display);font-size:26px;text-transform:uppercase}
+.guess span{color:var(--mute)}
+.guess:first-child b{color:var(--gold)}
+</style>
+</head>
+<body>
+<header>
+  <h1>Every<br>Lamborghini</h1>
+  <p>From the 350 GT in 1964 to the Temerario today. Tap any car for a bigger photo and a fun fact.</p>
+</header>
+<div class="bar"><div class="filters" id="filters"></div></div>
+<main id="grid"></main>
+<footer>Photos load from Wikipedia and Wikimedia Commons and belong to their photographers (open licences). Figures are approximate. Fan-made site, not affiliated with Automobili Lamborghini S.p.A.</footer>
+
+<dialog id="dlg" aria-label="Model details">
+  <button class="x" id="close" aria-label="Close">&times;</button>
+  <div class="ph" id="dph"></div>
+  <div class="dbody"><div><h3 id="dname"></h3><p id="dyr" style="color:var(--mute)"></p></div><div class="facts" id="dfacts"></div></div>
+  <p class="fact"><b>Fun fact</b><span id="dfun"></span></p>
+</dialog>
+
+<dialog id="scan" aria-label="Scan a Lamborghini">
+  <button class="x" id="sclose" aria-label="Close">&times;</button>
+  <div class="view" id="view">Camera is off</div>
+  <div class="sbody">
+    <h3>Scan a Lamborghini</h3>
+    <p style="color:var(--mute);margin-top:6px">Open your camera or upload a photo. The guess runs on your device, so your photo is not sent anywhere.</p>
+    <div class="sbtns">
+      <button class="pill" id="cam">Open camera</button>
+      <button class="pill scan" id="snap" hidden>Take photo</button>
+      <label class="pill" style="cursor:pointer">Upload photo<input type="file" id="file" accept="image/*" hidden></label>
+    </div>
+    <p id="sstat" aria-live="polite"></p>
+    <div id="sres"></div>
+  </div>
+</dialog>
+
+<script>
+// [name, wikipedia page, years, start year, engine, hp, top speed km/h, fun fact]
+const CARS=[
+["350 GT","Lamborghini_350_GT","1964–1966",1964,"3.5L V12",280,250,"The very first Lamborghini you could buy. Before this, the company had only built tractors."],
+["400 GT","Lamborghini_400_GT","1966–1968",1966,"4.0L V12",320,250,"The 400 GT 2+2 added two small rear seats, making it the first Lamborghini that could carry more than two people."],
+["Miura","Lamborghini_Miura","1966–1973",1966,"3.9L V12",350,280,"It put a V12 behind the driver and helped define what a supercar looks like. It is named after a famous family of Spanish fighting-bull breeders."],
+["Espada","Lamborghini_Espada","1968–1978",1968,"3.9L V12",325,245,"Espada is Spanish for “sword”, the one a matador uses. It was a real four-seater with a V12."],
+["Islero","Lamborghini_Islero","1968–1970",1968,"4.0L V12",320,248,"It is named after the bull that killed the famous matador Manolete in 1947."],
+["Jarama","Lamborghini_Jarama","1970–1976",1970,"4.0L V12",350,260,"Named after the Jarama area of Spain, known for fighting bulls and home to a famous racing circuit."],
+["Urraco","Lamborghini_Urraco","1973–1979",1973,"3.0L V8",265,245,"Lamborghini's first V8 car, built to reach buyers who wanted something smaller and cheaper than a V12."],
+["Countach","Lamborghini_Countach","1974–1990",1974,"5.2L V12",455,295,"“Countach” is an exclamation of amazement in the Piedmontese dialect. It is said a worker shouted it when he first saw the prototype."],
+["Silhouette","Lamborghini_Silhouette","1976–1979",1976,"3.0L V8",265,260,"It had a removable roof panel, and only about 50 were ever built."],
+["Jalpa","Lamborghini_Jalpa","1981–1988",1981,"3.5L V8",255,240,"Named after a breed of fighting bull. About 410 were built."],
+["LM002","Lamborghini_LM002","1986–1993",1986,"5.2L V12",444,210,"This off-road SUV was nicknamed the “Rambo Lambo” and used a Countach-type V12 engine."],
+["Diablo","Lamborghini_Diablo","1990–2001",1990,"6.0L V12",575,325,"It was the first Lamborghini to pass 200 mph (325 km/h). The name comes from a fierce bull that fought in 1869."],
+["Murciélago","Lamborghini_Murciélago","2001–2010",2001,"6.5L V12",661,340,"Murciélago means “bat” in Spanish. The name comes from a bull that survived 24 sword thrusts in 1879 and was spared."],
+["Gallardo","Lamborghini_Gallardo","2003–2013",2003,"5.2L V10",562,325,"Lamborghini's best seller of its time, with more than 14,000 built."],
+["Reventón","Lamborghini_Reventón","2007–2008",2007,"6.5L V12",650,340,"Only 20 coupes were made, and its styling was inspired by a fighter jet."],
+["Sesto Elemento","Lamborghini_Sesto_Elemento","2010–2011",2010,"5.2L V10",570,320,"“Sixth element” refers to carbon, number 6 on the periodic table. The car is made mostly of carbon fibre and weighs under 1,000 kg."],
+["Aventador","Lamborghini_Aventador","2011–2022",2011,"6.5L V12",770,350,"Named after a bull from Zaragoza that was honoured for its bravery in 2010."],
+["Veneno","Lamborghini_Veneno","2013–2014",2013,"6.5L V12",750,355,"Built for Lamborghini's 50th birthday, with only 14 made in total."],
+["Huracán","Lamborghini_Huracán","2014–2024",2014,"5.2L V10",640,325,"Huracán is the Mayan god of wind and storms, and also the name of a bull from 1879."],
+["Centenario","Lamborghini_Centenario","2016–2017",2016,"6.5L V12",770,350,"Made to celebrate 100 years since the birth of the founder, Ferruccio Lamborghini. Just 40 were built."],
+["Urus","Lamborghini_Urus","2018–today",2018,"4.0L V8 twin-turbo",650,305,"This super SUV became Lamborghini's best-selling model. It is named after the aurochs, the wild ancestor of modern cattle."],
+["Sián FKP 37","Lamborghini_Sián_FKP_37","2019–2021",2019,"6.5L V12 hybrid",819,350,"The first hybrid Lamborghini. “Sián” means “flash” in the Bolognese dialect, and 37 is for 1937, the birth year of Ferdinand Piëch."],
+["Countach LPI 800-4","Lamborghini_Countach_LPI_800-4","2021–2022",2021,"6.5L V12 hybrid",803,355,"A modern tribute to the original Countach. Just 112 were built."],
+["Revuelto","Lamborghini_Revuelto","2023–today",2023,"6.5L V12 plug-in hybrid",1015,350,"Lamborghini's first plug-in hybrid V12, and the first one to top 1,000 horsepower."],
+["Temerario","Lamborghini_Temerario","2024–today",2024,"4.0L V8 plug-in hybrid",920,343,"Temerario means “reckless” in Spanish, and its V8 can rev to 10,000 rpm."]
+];
+const ERAS=[["All",0,9999],["1960s–70s",1960,1979],["1980s–90s",1980,1999],["2000s",2000,2009],["2010s",2010,2019],["2020s",2020,2099]];
+const grid=document.getElementById("grid"),fil=document.getElementById("filters"),dlg=document.getElementById("dlg");
+
+// One request gets every photo link at once
+let photosP;
+function loadPhotos(){
+  const titles=CARS.map(c=>c[1].replace(/_/g," "));
+  const url="https://en.wikipedia.org/w/api.php?action=query&format=json&origin=*&redirects=1&prop=pageimages&piprop=thumbnail&pithumbsize=1000&titles="+encodeURIComponent(titles.join("|"));
+  return fetch(url).then(r=>r.json()).then(j=>{
+    const q=j.query,norm={},red={},pages={},map={};
+    (q.normalized||[]).forEach(n=>norm[n.from]=n.to);
+    (q.redirects||[]).forEach(r=>red[r.from]=r.to);
+    Object.values(q.pages).forEach(p=>pages[p.title]=p);
+    titles.forEach(t=>{let x=norm[t]||t;x=red[x]||x;const p=pages[x];map[t]=p&&p.thumbnail?p.thumbnail:null});
+    return map;
+  });
+}
+photosP=loadPhotos();
+
+function fillPhoto(box,car,small){
+  const name=car[0],key=car[1].replace(/_/g," ");
+  box.className="ph load";box.innerHTML="Loading photo…";
+  const fail=(err)=>{
+    box.className="ph";box.innerHTML="";
+    const t=document.createElement("span");t.textContent=name;
+    const b=document.createElement("button");b.className="retry";b.textContent="Photo didn’t load. Try again";
+    b.onclick=e=>{e.stopPropagation();photosP=loadPhotos();fillPhoto(box,car,small)};
+    const h=document.createElement("small");h.style.cssText="font:14px var(--body);color:#8a8799;max-width:30ch";
+    h.textContent="Photos need internet and may not show in a preview window. Open the live site link instead."+(err&&err.message?" ["+err.message+"]":"");
+    box.append(t,b,h);
+  };
+  photosP.then(map=>{
+    const th=map[key];if(!th)return fail(new Error("no photo found"));
+    let src=th.source;
+    if(small&&th.width>700)src=src.replace(/\/\d+px-/,"/640px-");
+    const im=new Image();im.alt=name;
+    im.onload=()=>{box.className="ph";box.innerHTML="";box.appendChild(im);requestAnimationFrame(()=>im.classList.add("ok"))};
+    im.onerror=()=>fail(new Error("image blocked"));
+    im.src=src;
+  }).catch(fail);
+}
+function render(lo,hi){
+  grid.innerHTML="";
+  CARS.filter(c=>c[3]>=lo&&c[3]<=hi).forEach((c,i)=>{
+    const d=document.createElement("div");d.className="card";d.tabIndex=0;d.setAttribute("role","button");d.setAttribute("aria-label",c[0]);d.style.animationDelay=(i*40)+"ms";
+    d.innerHTML=`<div class="ph"></div><div class="info"><h2>${c[0]}</h2><div class="yr">${c[2]}</div><div class="row"><b>${c[6]}<small>km/h</small></b><span>${c[4]}</span></div></div>`;
+    fillPhoto(d.querySelector(".ph"),c,true);
+    d.onclick=()=>openCar(c);
+    d.onkeydown=e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();openCar(c)}};
+    grid.appendChild(d);
+  });
+}
+ERAS.forEach((e,i)=>{
+  const p=document.createElement("button");p.className="pill";p.textContent=e[0];p.setAttribute("aria-pressed",i==0);
+  p.onclick=()=>{fil.querySelectorAll(".pill:not(.fun)").forEach(x=>x.setAttribute("aria-pressed",x==p));render(e[1],e[2])};
+  fil.appendChild(p);
+});
+const fun=document.createElement("button");fun.className="pill fun";fun.textContent="Surprise me";
+fun.onclick=()=>openCar(CARS[Math.floor(Math.random()*CARS.length)]);
+fil.appendChild(fun);
+
+function openCar(c){
+  fillPhoto(document.getElementById("dph"),c,false);
+  document.getElementById("dname").textContent=c[0];
+  document.getElementById("dyr").textContent=c[2];
+  document.getElementById("dfacts").innerHTML=`<div><b>${c[6]} km/h</b><span>Top speed</span></div><div><b>${c[5]} hp</b><span>Power</span></div><div><b>${c[4]}</b><span>Engine</span></div>`;
+  document.getElementById("dfun").textContent=c[7];
+  dlg.showModal();
+}
+document.getElementById("close").onclick=()=>dlg.close();
+dlg.addEventListener("click",e=>{if(e.target===dlg)dlg.close()});
+/* ---------- Scan a car ---------- */
+const scan=document.getElementById("scan"),view=document.getElementById("view"),sstat=document.getElementById("sstat"),sres=document.getElementById("sres"),snap=document.getElementById("snap"),fileIn=document.getElementById("file");
+let stream=null,clf=null;
+const OTHER=["Ferrari","Porsche","McLaren","Mercedes","Toyota family car","pickup truck","bus","motorcycle","building","person"];
+function stopCam(){if(stream){stream.getTracks().forEach(t=>t.stop());stream=null}}
+const scanBtn=document.createElement("button");scanBtn.className="pill scan";scanBtn.textContent="Scan a car";
+scanBtn.onclick=()=>scan.showModal();
+fil.insertBefore(scanBtn,fun);
+document.getElementById("sclose").onclick=()=>scan.close();
+scan.addEventListener("close",stopCam);
+document.getElementById("cam").onclick=async()=>{
+  sstat.textContent="";
+  try{
+    stream=await navigator.mediaDevices.getUserMedia({video:{facingMode:"environment"},audio:false});
+    const v=document.createElement("video");v.srcObject=stream;v.playsInline=true;v.muted=true;await v.play();
+    view.innerHTML="";view.appendChild(v);snap.hidden=false;sres.innerHTML="";
+  }catch(e){sstat.textContent="The camera couldn’t open. Allow camera access in your browser, or upload a photo instead."}
+};
+snap.onclick=()=>{
+  const v=view.querySelector("video");if(!v)return;
+  const c=document.createElement("canvas");c.width=v.videoWidth;c.height=v.videoHeight;
+  c.getContext("2d").drawImage(v,0,0);stopCam();snap.hidden=true;identify(c.toDataURL("image/jpeg",.9));
+};
+fileIn.onchange=()=>{const f=fileIn.files[0];if(!f)return;stopCam();snap.hidden=true;identify(URL.createObjectURL(f));fileIn.value=""};
+async function identify(url){
+  const im=new Image();im.alt="Your photo";im.src=url;view.innerHTML="";view.appendChild(im);sres.innerHTML="";
+  try{
+    if(!clf){
+      sstat.textContent="Loading the car-recognition model. The first time can take a minute…";
+      const {pipeline}=await import("https://cdn.jsdelivr.net/npm/@huggingface/transformers@3.5.1");
+      clf=await pipeline("zero-shot-image-classification","Xenova/clip-vit-base-patch32");
+    }
+    sstat.textContent="Looking at your photo…";
+    const labels=CARS.map(c=>"Lamborghini "+c[0]).concat(OTHER);
+    const out=await clf(url,labels,{hypothesis_template:"a photo of a {}"});
+    const lamb=out.filter(o=>o.label.startsWith("Lamborghini "));
+    const total=lamb.reduce((a,o)=>a+o.score,0);
+    if(total<0.5){sstat.textContent="This doesn’t look like a Lamborghini I know. Try a clearer photo from the side or front.";return}
+    sstat.textContent="Best guesses (this is an estimate, similar models can get mixed up):";
+    lamb.sort((a,b)=>b.score-a.score).slice(0,3).forEach(o=>{
+      const car=CARS.find(c=>"Lamborghini "+c[0]===o.label);
+      const b=document.createElement("button");b.className="guess";
+      b.innerHTML=`<b>${car[0]}</b><span>${Math.round(o.score/total*100)}% match · see details</span>`;
+      b.onclick=()=>{scan.close();openCar(car)};
+      sres.appendChild(b);
+    });
+  }catch(e){sstat.textContent="The scan couldn’t run. It needs an internet connection and does not work inside preview windows. Open your live website link and try again."}
+}
+render(0,9999);
+</script>
+</body>
+</html>
