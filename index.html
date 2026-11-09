@@ -73,15 +73,78 @@ footer{padding:40px 5vw;color:var(--mute);font-size:14px;border-top:1px solid #2
 .guess b{font-family:var(--display);font-size:26px;text-transform:uppercase}
 .guess span{color:var(--mute)}
 .guess:first-child b{color:var(--gold)}
+
+a.retry{text-decoration:none;display:inline-block}
+body.lock{overflow:hidden}
+#home{position:fixed;inset:0;z-index:50;background:radial-gradient(ellipse 70% 55% at 50% 60%,rgba(242,194,0,.16),transparent 70%),var(--bg);display:grid;place-content:center;text-align:center;padding:5vw;transition:transform .8s cubic-bezier(.7,0,.2,1)}
+#home.out{transform:translateY(-100%)}
+#home small{font-family:var(--display);font-size:22px;letter-spacing:.4em;color:var(--gold);text-transform:uppercase;animation:in .8s .1s both}
+#home h1{font-size:clamp(70px,17vw,230px);margin-top:6px;animation-delay:.2s}
+#home p{color:var(--mute);font-size:20px;max-width:40ch;margin:18px auto 34px;animation:in .9s .5s both}
+.go{background:var(--gold);color:#111;border:0;font-family:var(--display);font-weight:700;font-size:26px;letter-spacing:.08em;padding:14px 44px;cursor:pointer;clip-path:polygon(0 0,100% 0,calc(100% - 16px) 100%,0 100%);justify-self:center;animation:in .9s .8s both;transition:transform .2s}
+.go:hover{transform:translateY(-3px)}.go:active{transform:scale(.96)}
+.brand{font-family:var(--display);font-weight:800;font-size:22px;letter-spacing:.1em;background:none;border:0;color:var(--ink);cursor:pointer;margin-right:10px}
+.brand:hover{color:var(--gold)}
+a.pill{text-decoration:none;display:inline-block}
+.sec{max-width:1400px;margin:auto;padding:70px 5vw 20px}
+.sec h2{font-family:var(--display);font-weight:800;font-size:clamp(44px,8vw,96px);line-height:.95;text-transform:uppercase}
+.sec>p{color:var(--mute);max-width:60ch;margin-top:14px;font-size:18px}
+.tl{margin-top:34px;border-left:3px solid var(--gold);display:grid;gap:22px;padding-left:26px;max-width:860px}
+.tl div b{font-family:var(--display);font-size:30px;color:var(--gold);line-height:1}
+.tl div p{color:var(--ink);opacity:.85;margin-top:2px}
+.facts2{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:18px;margin-top:34px}
+.facts2 div{background:var(--panel);padding:20px 22px;border-top:3px solid var(--gold)}
+.facts2 b{font-family:var(--display);font-size:26px;text-transform:uppercase;display:block;line-height:1.05;margin-bottom:6px}
+.facts2 p{color:var(--mute)}
+.rv{opacity:0;transform:translateY(26px);transition:opacity .7s,transform .7s}
+.rv.in{opacity:1;transform:none}
 </style>
 </head>
 <body>
+<section id="home" aria-label="Welcome">
+  <small>Welcome to</small>
+  <h1>Lambo<br>Info</h1>
+  <p>Every Lamborghini ever built: photos, speeds, fun facts and the story of the bull.</p>
+  <button class="go" id="start">GET STARTED</button>
+</section>
 <header>
   <h1>Every<br>Lamborghini</h1>
   <p>From the 350 GT in 1964 to the Temerario today. Tap any car for a bigger photo and a fun fact.</p>
 </header>
 <div class="bar"><div class="filters" id="filters"></div></div>
 <main id="grid"></main>
+
+<section class="sec" id="story">
+  <h2 class="rv">How Lamborghini<br>was built</h2>
+  <p class="rv">The story of a tractor maker who decided to build the best sports car in the world.</p>
+  <div class="tl">
+    <div class="rv"><b>1916</b><p>Ferruccio Lamborghini is born into a farming family near Bologna, Italy. He grows up loving machines.</p></div>
+    <div class="rv"><b>1948</b><p>After working as a mechanic in the Italian air force during World War II, he starts building tractors from leftover military vehicles. The business becomes a big success.</p></div>
+    <div class="rv"><b>1963</b><p>He founds Automobili Lamborghini in Sant’Agata Bolognese. A popular story says he decided to build his own cars after a disagreement with Enzo Ferrari about a Ferrari he owned, though historians debate the details.</p></div>
+    <div class="rv"><b>1964</b><p>The 350 GT goes on sale, powered by a V12 designed by engineer Giotto Bizzarrini.</p></div>
+    <div class="rv"><b>1966</b><p>The Miura shocks the world. A young team of engineers, Gian Paolo Dallara, Paolo Stanzani and Bob Wallace, helped develop it, and it put the engine behind the driver like a race car.</p></div>
+    <div class="rv"><b>1972–1974</b><p>Money problems and a tough economy push Ferruccio to sell his shares. He retires to a wine estate in Umbria and later passes away in 1993.</p></div>
+    <div class="rv"><b>1974</b><p>The wedge-shaped Countach arrives, with scissor doors that become a Lamborghini trademark.</p></div>
+    <div class="rv"><b>1998</b><p>After several owners, Audi, part of the Volkswagen Group, takes over. Sales and quality grow.</p></div>
+    <div class="rv"><b>2018–2023</b><p>The Urus SUV becomes a hit, and in 2023 Lamborghini delivers more than 10,000 cars in a single year for the first time.</p></div>
+  </div>
+</section>
+
+<section class="sec" id="funfacts">
+  <h2 class="rv">Fun facts</h2>
+  <p class="rv">Things that make Lamborghini different from every other car maker.</p>
+  <div class="facts2">
+    <div class="rv"><b>Bulls everywhere</b><p>Ferruccio was born under the zodiac sign Taurus and loved bullfighting. The logo is a golden bull, and most models are named after fighting bulls or bull breeders.</p></div>
+    <div class="rv"><b>Still a tractor brand</b><p>The tractor company still exists today, but it has been owned by someone else for a long time and has nothing to do with the car maker.</p></div>
+    <div class="rv"><b>Scissor doors</b><p>Lamborghini’s V12 flagship cars open their doors upward since the Countach, which is a big part of why they look so dramatic.</p></div>
+    <div class="rv"><b>A V12 that lasted decades</b><p>The V12 engine family that started in 1963 was developed over nearly five decades before an all-new V12 arrived with the Aventador.</p></div>
+    <div class="rv"><b>Engine behind you</b><p>Since the Miura, most Lamborghini supercars place the engine behind the driver, which helps balance and handling.</p></div>
+    <div class="rv"><b>Names with meaning</b><p>Murciélago means “bat”, Espada means “sword”, and Urus is named after the aurochs, the wild ancestor of modern cattle.</p></div>
+    <div class="rv"><b>Same home since 1963</b><p>Lamborghini still builds its cars at its factory in Sant’Agata Bolognese, near Bologna in Italy.</p></div>
+    <div class="rv"><b>Going electric</b><p>The Revuelto is the first plug-in hybrid V12 Lamborghini, and the Temerario also uses a hybrid system.</p></div>
+  </div>
+</section>
+
 <footer>Photos load from Wikipedia and Wikimedia Commons and belong to their photographers (open licences). Figures are approximate. Fan-made site, not affiliated with Automobili Lamborghini S.p.A.</footer>
 
 <dialog id="dlg" aria-label="Model details">
@@ -143,7 +206,7 @@ const grid=document.getElementById("grid"),fil=document.getElementById("filters"
 let photosP;
 function loadPhotos(){
   const titles=CARS.map(c=>c[1].replace(/_/g," "));
-  const url="https://en.wikipedia.org/w/api.php?action=query&format=json&origin=*&redirects=1&prop=pageimages&piprop=thumbnail&pithumbsize=1000&titles="+encodeURIComponent(titles.join("|"));
+  const url="https://en.wikipedia.org/w/api.php?action=query&format=json&origin=*&redirects=1&prop=pageimages&piprop=thumbnail&pithumbsize=960&titles="+encodeURIComponent(titles.join("|"));
   return fetch(url).then(r=>r.json()).then(j=>{
     const q=j.query,norm={},red={},pages={},map={};
     (q.normalized||[]).forEach(n=>norm[n.from]=n.to);
@@ -158,23 +221,22 @@ photosP=loadPhotos();
 function fillPhoto(box,car,small){
   const name=car[0],key=car[1].replace(/_/g," ");
   box.className="ph load";box.innerHTML="Loading photo…";
-  const fail=(err)=>{
+  const fail=()=>{
     box.className="ph";box.innerHTML="";
     const t=document.createElement("span");t.textContent=name;
-    const b=document.createElement("button");b.className="retry";b.textContent="Photo didn’t load. Try again";
-    b.onclick=e=>{e.stopPropagation();photosP=loadPhotos();fillPhoto(box,car,small)};
-    const h=document.createElement("small");h.style.cssText="font:14px var(--body);color:#8a8799;max-width:30ch";
-    h.textContent="Photos need internet and may not show in a preview window. Open the live site link instead."+(err&&err.message?" ["+err.message+"]":"");
-    box.append(t,b,h);
+    const a=document.createElement("a");a.className="retry";a.textContent="Click here to see the picture";
+    a.href="https://en.wikipedia.org/wiki/"+encodeURIComponent(car[1]);a.target="_blank";a.rel="noopener";
+    a.onclick=e=>e.stopPropagation();
+    box.append(t,a);
   };
   photosP.then(map=>{
     const th=map[key];if(!th)return fail(new Error("no photo found"));
-    let src=th.source;
-    if(small&&th.width>700)src=src.replace(/\/\d+px-/,"/640px-");
-    const im=new Image();im.alt=name;
+    const base=th.source,at=n=>base.replace(/\/\d+px-/,"/"+n+"px-");
+    const tries=small?[at(500),at(330),base]:[base,at(960),at(500)];
+    const im=new Image();im.alt=name;im.referrerPolicy="no-referrer";let i=0;
     im.onload=()=>{box.className="ph";box.innerHTML="";box.appendChild(im);requestAnimationFrame(()=>im.classList.add("ok"))};
-    im.onerror=()=>fail(new Error("image blocked"));
-    im.src=src;
+    im.onerror=()=>{i++;if(i<tries.length)im.src=tries[i];else fail(new Error("image blocked"))};
+    im.src=tries[0];
   }).catch(fail);
 }
 function render(lo,hi){
@@ -255,6 +317,18 @@ async function identify(url){
     });
   }catch(e){sstat.textContent="The scan couldn’t run. It needs an internet connection and does not work inside preview windows. Open your live website link and try again."}
 }
+/* ---------- Home screen, links, reveal ---------- */
+const home=document.getElementById("home");
+document.body.classList.add("lock");
+document.getElementById("start").onclick=()=>{home.classList.add("out");document.body.classList.remove("lock");window.scrollTo(0,0)};
+const brand=document.createElement("button");brand.className="brand";brand.textContent="LAMBO INFO";
+brand.onclick=()=>{document.body.classList.add("lock");home.classList.remove("out")};
+fil.insertBefore(brand,fil.firstChild);
+[["Story","#story"],["Fun facts","#funfacts"]].forEach(l=>{
+  const a=document.createElement("a");a.className="pill";a.textContent=l[0];a.href=l[1];fil.insertBefore(a,scanBtn);
+});
+const rio=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add("in");rio.unobserve(e.target)}}),{threshold:.15});
+document.querySelectorAll(".rv").forEach(el=>rio.observe(el));
 render(0,9999);
 </script>
 </body>
